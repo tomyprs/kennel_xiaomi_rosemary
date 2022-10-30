@@ -680,7 +680,9 @@ static int gs_can_open(struct net_device *netdev)
 		dm->flags |= GS_CAN_MODE_TRIPLE_SAMPLE;
 
 	/* finally start device */
-	dm->mode = GS_CAN_MODE_START;
+	dev->can.state = CAN_STATE_ERROR_ACTIVE;
+	dm->mode = cpu_to_le32(GS_CAN_MODE_START);
+	dm->flags = cpu_to_le32(flags);
 	rc = usb_control_msg(interface_to_usbdev(dev->iface),
 			     usb_sndctrlpipe(interface_to_usbdev(dev->iface), 0),
 			     GS_USB_BREQ_MODE,
@@ -695,12 +697,11 @@ static int gs_can_open(struct net_device *netdev)
 	if (rc < 0) {
 		netdev_err(netdev, "Couldn't start device (err=%d)\n", rc);
 		kfree(dm);
+		dev->can.state = CAN_STATE_STOPPED;
 		return rc;
 	}
 
 	kfree(dm);
-
-	dev->can.state = CAN_STATE_ERROR_ACTIVE;
 
 	parent->active_channels++;
 	if (!(dev->can.ctrlmode & CAN_CTRLMODE_LISTENONLY))
