@@ -3846,7 +3846,7 @@ static int ufshcd_read_string_desc(struct ufs_hba *hba, int desc_index,
 	}
 out:
 	if (str) {
-		memset(buf,0,sizeof(buf));
+		memset(buf, 0, size);
 		memcpy(buf, str, ret);
 		kfree(str);
 	}
@@ -9195,8 +9195,8 @@ static int ufshcd_resume(struct ufs_hba *hba, enum ufs_pm_op pm_op)
 	int retry = 3;
 
 	/* MTK PATCH: Lock deepidle/SODI @enter UFS resume callback */
-	ufshcd_vops_deepidle_lock(hba, true);
 	enum ufs_dev_pwr_mode old_pwr_mode;
+	ufshcd_vops_deepidle_lock(hba, true);
 
 	hba->pm_op_in_progress = 1;
 	old_link_state = hba->uic_link_state;
