@@ -1,0 +1,21 @@
+kind: pipeline
+name: bionic
+
+clone:
+  depth: 1
+
+steps:
+- name: Building
+  image: debian:stable-slim
+  environment:
+    bot_token:
+      from_secret: BOT_API_KEY
+    chat_id:
+      from_secret: CHAT_ID
+    DEVICE: rosemary
+    KBUILD_BUILD_USER: kaiverse
+    KBUILD_BUILD_HOST: bionic
+    TZ: Asia/Jakarta
+  commands:
+    - apt-get update && apt-get install -y bison build-essential bc bison curl libssl-dev git zip python python3 flex cpio jq libncurses5-dev wget
+    - bash build.config.bionic.sh
