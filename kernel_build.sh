@@ -96,7 +96,7 @@ build_end() {
     echo -e "\n> Build successful! generating flashable zip..."
     cd "$AK_DIR" || echo -e "\nAnykernel directory ($AK_DIR) does not exist" || exit 1
     mv "$KERNEL_IMG" "$AK_DIR"/
-    ZIP_NAME="bionic-delta-$(date +"%H:%M:%S")"
+    ZIP_NAME="bionic-delta_$(date +"%H-%M-%S")"
     zip -r9 "$ZIP_NAME".zip 'anykernel.sh' 'Image.gz-dtb' 'META-INF' 'tools'
     FINAL_ZIP="$ZIP_NAME.zip"
     tg_pushzip "$FINAL_ZIP" "Time taken: <code>$((DIFF / 60))m $((DIFF % 60))s</code>"
