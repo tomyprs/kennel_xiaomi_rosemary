@@ -98,8 +98,9 @@ build_end() {
     mv "$KERNEL_IMG" "$AK_DIR"/
     ZIP_NAME="bionic-delta-$(date +"%H:%M:%S")"
     zip -r9 "$ZIP_NAME".zip 'anykernel.sh' 'Image.gz-dtb' 'META-INF' 'tools'
-    tg_pushzip "$ZIP_NAME" "Time taken: <code>$((DIFF / 60))m $((DIFF % 60))s</code>"
-	echo -e "\n> Sent zip through Telegram.\n> File: $ZIP_NAME"
+    FINAL_ZIP="$ZIP_NAME.zip"
+    tg_pushzip "$FINAL_ZIP" "Time taken: <code>$((DIFF / 60))m $((DIFF % 60))s</code>"
+	echo -e "\n> Sent zip through Telegram.\n> File: $FINAL_ZIP"
 }
 
 # End function definitions
