@@ -6,7 +6,7 @@
 
 # Config
 DEVICE="rosemary"
-DEFCONFIG="${DEVICE}_defconfig"
+DEFCONFIG="${DEVICE}_user_defconfig"
 LOG="$HOME/log.txt"
 
 # Export arch and subarch
