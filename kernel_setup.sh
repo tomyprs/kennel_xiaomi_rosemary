@@ -11,7 +11,7 @@ CURRENT_DIR="$(pwd)"
 KERNELNAME="Bionic-delta"
 KERNEL_DIR="$CURRENT_DIR"
 AK_REPO="https://github.com/bionicverse/AnyKernel3"
-AK_BRANCH="eas"
+AK_BRANCH="rosemary"
 AK_DIR="$HOME/AnyKernel3"
 TC_DIR="$HOME/proton-clang"
 # End Config
